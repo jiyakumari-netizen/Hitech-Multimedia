@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HiTech Multimedia — Capturing Memories</title>
+  <meta name="description" content="HiTech Multimedia — Photography | Videography | Album Designing | Drone Shoots" />
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --card:#0f0f10;
+      --accent:#d9b44a; /* gold */
+      --muted:#cfcfcf;
+      --glass: rgba(255,255,255,0.04);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:var(--bg); color:var(--muted); -webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(11,11,11,0.9), rgba(11,11,11,0.6));backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
+    .container{max-width:1100px;margin:0 auto;padding:20px}
+
+    /* Navbar */
+    .nav{display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:46px;height:46px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#ffd77a);display:flex;align-items:center;justify-content:center;font-weight:700;color:#0b0b0b}
+    nav ul{display:flex;gap:18px;align-items:center;list-style:none;margin:0;padding:0}
+    nav li{padding:8px 10px;border-radius:8px}
+    nav li:hover{background:var(--glass)}
+    .cta{background:var(--accent);color:#0b0b0b;padding:8px 14px;border-radius:8px;font-weight:600}
+    .mobile-toggle{display:none}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:60px 0}
+    .hero-left h1{font-size:44px;margin:0 0 12px;color:white;line-height:1.02}
+    .hero-left p{margin:0 0 20px;color:var(--muted)}
+    .actions{display:flex;gap:12px}
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+
+    /* Services */
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:30px 0}
+    .service{padding:18px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border:1px solid rgba(255,255,255,0.03)}
+    .service h3{margin:6px 0 8px;color:white}
+    .service p{margin:0;color:var(--muted);font-size:14px}
+
+    /* Portfolio */
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
+    .gallery img{width:100%;height:220px;object-fit:cover;border-radius:8px;display:block}
+    .filters{display:flex;gap:10px;margin-bottom:12px}
+    .filter{padding:8px 12px;border-radius:999px;background:transparent;border:1px solid rgba(255,255,255,0.04);cursor:pointer}
+
+    /* Contact */
+    .contact{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:30px 0}
+    form label{display:block;font-size:13px;margin-bottom:6px;color:var(--muted)}
+    input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);resize:vertical}
+    button.primary{background:var(--accent);border:none;color:#0b0b0b;padding:10px 14px;border-radius:8px;font-weight:700;cursor:pointer}
+
+    footer{Padding:20px 0;border-top:1px solid rgba(255,255,255,0.03);margin-top:40px}
+
+    /* Responsive */
+    @media(max-width:1000px){
+      .hero{grid-template-columns:1fr;}
+      .hero-right{order:-1}
+      .services{grid-template-columns:repeat(2,1fr)}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .contact{grid-template-columns:1fr}
+    }
+    @media(max-width:680px){
+      nav ul{display:none}
+      .mobile-toggle{display:block}
+      .mobile-menu{display:none}
+      .services{grid-template-columns:1fr}
+      .gallery{grid-template-columns:1fr}
+      .logo{width:40px;height:40px}
+    }
+
+    /* Simple lightbox */
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;padding:20px;z-index:80;opacity:0;pointer-events:none;transition:opacity .18s}
+    .lightbox.open{opacity:1;pointer-events:auto}
+    .lightbox img{max-width:95%;max-height:85%;border-radius:8px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">HM</div>
+        <div>
+          <div style="font-weight:700;color:white">HiTech Multimedia</div>
+          <div style="font-size:12px;color:var(--muted)">Capturing Memories, Creating Stories</div>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="cta" href="#contact">Book Now</a>
+        <button class="mobile-toggle" aria-label="menu" onclick="toggleMobile()">☰</button>
+      </div>
+    </div>
+    <div class="mobile-menu card" style="display:none;padding:14px;">
+      <a href="#home">Home</a><br/>
+      <a href="#services">Services</a><br/>
+      <a href="#portfolio">Portfolio</a><br/>
+      <a href="#about">About</a><br/>
+      <a href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <main class="container" id="home">
+    <section class="hero">
+      <div class="hero-left">
+        <h1>HiTech Multimedia</h1>
+        <p>Professional photography, cinematic videography and premium album design — serving Balidih, Bokaro and beyond.</p>
+        <div class="actions">
+          <a class="cta" href="#portfolio">View Portfolio</a>
+          <a class="card" href="#contact" style="display:inline-flex;align-items:center;gap:8px">Request a Quote</a>
+        </div>
+
+        <div style="margin-top:22px;display:flex;gap:12px;align-items:center">
+          <div class="card" style="display:flex;gap:10px;align-items:center">
+            <div style="font-weight:700">📞</div>
+            <div style="font-size:13px">+91 9939860818<br/><span style="color:var(--muted);font-size:12px">Call / WhatsApp</span></div>
+          </div>
+          <div class="card" style="display:flex;gap:10px;align-items:center">
+            <div style="font-weight:700">📍</div>
+            <div style="font-size:13px">Balidih, Bokaro<br/><span style="color:var(--muted);font-size:12px">Jharkhand, India</span></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-right card" style="border-radius:14px;overflow:hidden">
+        <div style="height:360px;background:#111;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:12px">
+          <img src="https://via.placeholder.com/380x240.png?text=HiTech+Multimedia" alt="sample" style="width:100%;height:220px;object-fit:cover;border-radius:8px;margin-bottom:12px" />
+          <div style="font-size:13px;color:var(--muted)">Featured: Wedding Highlights — 4K Cinematic</div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="services">
+      <h2 style="color:white">Services</h2>
+      <div class="services">
+        <div class="service">
+          <h3>Photography</h3>
+          <p>Weddings, portraits, events and product photography — full-frame cameras, professional lighting and retouching.</p>
+        </div>
+        <div class="service">
+          <h3>Videography</h3>
+          <p>Cinematic storytelling in HD/4K, highlights, full ceremonies, and drone cinematics for breathtaking coverage.</p>
+        </div>
+        <div class="service">
+          <h3>Album Designing</h3>
+          <p>Custom album layouts with premium printing options — leather covers, lay-flat pages and print-ready files.</p>
+        </div>
+        <div class="service">
+          <h3>Drone Shoots</h3>
+          <p>Aerial coverage for events, venues and cinematic establishing shots (licensed drone operation).</p>
+        </div>
+        <div class="service">
+          <h3>Editing & Retouch</h3>
+          <p>Advanced color grading, skin retouching and video editing to make your story shine.</p>
+        </div>
+        <div class="service">
+          <h3>Printing & Framing</h3>
+          <p>Large prints, canvas, frames and end-to-end album production.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio">
+      <h2 style="color:white">Portfolio</h2>
+      <div class="filters">
+        <button class="filter" onclick="filterGallery('all')">All</button>
+        <button class="filter" onclick="filterGallery('wedding')">Weddings</button>
+        <button class="filter" onclick="filterGallery('corporate')">Corporate</button>
+        <button class="filter" onclick="filterGallery('travel')">Travel</button>
+      </div>
+
+      <div class="gallery" id="gallery">
+        <img data-cat="wedding" src="https://via.placeholder.com/600x400.png?text=Wedding+1" alt="w1" onclick="openLightbox(this)"/>
+        <img data-cat="wedding" src="https://via.placeholder.com/600x400.png?text=Wedding+2" alt="w2" onclick="openLightbox(this)"/>
+        <img data-cat="travel" src="https://via.placeholder.com/600x400.png?text=Travel+1" alt="t1" onclick="openLightbox(this)"/>
+        <img data-cat="corporate" src="https://via.placeholder.com/600x400.png?text=Corporate+1" alt="c1" onclick="openLightbox(this)"/>
+        <img data-cat="wedding" src="https://via.placeholder.com/600x400.png?text=Wedding+3" alt="w3" onclick="openLightbox(this)"/>
+        <img data-cat="travel" src="https://via.placeholder.com/600x400.png?text=Travel+2" alt="t2" onclick="openLightbox(this)"/>
+      </div>
+    </section>
+
+    <section id="about" style="margin-top:18px">
+      <h2 style="color:white">About HiTech Multimedia</h2>
+      <div class="card" style="padding:18px;margin-top:12px">
+        <p style="margin:0;color:var(--muted)">HiTech Multimedia is a professional photography and videography studio based in Balidih, Bokaro. We specialize in wedding coverage, cinematic videos, album designing and aerial drone cinematics.
+        Our team uses industry-grade cameras, lenses and lighting to produce polished photos and videos. We also offer end-to-end album production including printing and framing.</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 style="color:white">Contact & Booking</h2>
+      <div class="contact">
+        <form class="card" onsubmit="handleForm(event)">
+          <label for="name">Name</label>
+          <input id="name" required />
+
+          <label for="email">Email</label>
+          <input id="email" type="email" required />
+
+          <label for="phone">Phone/WhatsApp</label>
+          <input id="phone" required />
+
+          <label for="service">Service Interested In</label>
+          <select id="service">
+            <option>Photography</option>
+            <option>Videography</option>
+            <option>Album Designing</option>
+            <option>Drone Shoots</option>
+            <option>Editing & Printing</option>
+          </select>
+
+          <label for="message">Message</label>
+          <textarea id="message" rows="4"></textarea>
+
+          <div style="margin-top:12px"><button class="primary" type="submit">Send Request</button></div>
+        </form>
+
+        <div class="card" style="padding:18px">
+          <h3 style="margin-top:0;color:white">Studio Details</h3>
+          <p style="margin:6px 0;color:var(--muted)"><strong>Address:</strong> Balidih, Bokaro, Jharkhand</p>
+          <p style="margin:6px 0;color:var(--muted)"><strong>Phone:</strong> +91 9939860818 / +91 9934372570</p>
+          <p style="margin:6px 0;color:var(--muted)"><strong>Email:</strong> hitechmultimedia@gmail.com</p>
+
+          <div style="margin-top:12px">
+            <a href="#" style="display:inline-block;margin-right:8px">Instagram</a>
+            <a href="#" style="display:inline-block;margin-right:8px">Facebook</a>
+            <a href="#">YouTube</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <div>
+          <div style="font-weight:700;color:white">HiTech Multimedia</div>
+          <div style="font-size:13px;color:var(--muted)">© HiTech Multimedia — All rights reserved</div>
+        </div>
+        <div style="font-size:13px;color:var(--muted)">Designed for web — Balidih, Bokaro</div>
+      </div>
+    </footer>
+  </main>
+
+  <div id="lightbox" class="lightbox" onclick="closeLightbox(event)"><img src="" alt="light" /></div>
+
+  <script>
+    // mobile menu
+    function toggleMobile(){
+      const m = document.querySelector('.mobile-menu');
+      if(!m) return;
+      m.style.display = m.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // gallery filter
+    function filterGallery(cat){
+      const imgs = document.querySelectorAll('#gallery img');
+      imgs.forEach(i=>{
+        if(cat==='all' || i.dataset.cat===cat) i.style.display='block'; else i.style.display='none';
+      })
+    }
+
+    // lightbox
+    function openLightbox(el){
+      const lb = document.getElementById('lightbox');
+      lb.querySelector('img').src = el.src.replace('600x400','1200x800');
+      lb.classList.add('open');
+    }
+    function closeLightbox(e){
+      if(e.target.id==='lightbox') document.getElementById('lightbox').classList.remove('open');
+    }
+
+    // contact form (demo only)
+    function handleForm(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value || 'Friend';
+      alert('Thanks, '+name+" — your request was recorded. We'll contact you soon (demo).\nEmail: hitechmultimedia@gmail.com");
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
